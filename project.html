@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chetla Cricket Association</title>
+  <link rel="icon" type="image/x-icon" href="1000366732.ico">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    .navbar a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      display: block;
+      transition: background 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: #575757;
+    }
+
+    /* Heading */
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 2.5rem;
+    }
+
+    /* Carousel container */
+    .carousel {
+      position: relative;
+      width: 80%;
+      max-width: 800px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    /* Buttons */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 4px;
+      user-select: none;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="home.html">Home</a>
+    <a href="theclub.html">The Club</a>
+    <a href="history.html">History</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+
+  <!-- Main heading -->
+  <h1>Chetla Cricket Association</h1>
+
+  <!-- Carousel -->
+  <div class="carousel">
+    <!-- Replace these paths with relative paths to your images -->
+    <img src="images/website1-1.webp" class="active" alt="Image 1">
+    <img src="images/images.jpeg" alt="Image 2">
+    <img src="images/converted-1024x500.jpg" alt="Image 3">
+
+    <button class="prev">&#10094; Prev</button>
+    <button class="next">Next &#10095;</button>
+  </div>
+
+  <script>
+    const images = document.querySelectorAll('.carousel img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    let currentIndex = 0;
+    let slideInterval;
+
+    // Show the image at currentIndex
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+    }
+
+    // Show next image
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }
+
+    // Show previous image
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    }
+
+    // Auto slide every 5 seconds
+    function startSlideShow() {
+      slideInterval = setInterval(nextImage, 5000);
+    }
+
+    // Stop the slideshow temporarily when user clicks
+    function stopSlideShow() {
+      clearInterval(slideInterval);
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', () => {
+      stopSlideShow();
+      nextImage();
+      startSlideShow();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      stopSlideShow();
+      prevImage();
+      startSlideShow();
+    });
+
+    // Initialize
+    showImage(currentIndex);
+    startSlideShow();
+  </script>
+
+</body>
+</html>
